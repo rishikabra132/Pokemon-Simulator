@@ -1,6 +1,6 @@
-# Pokemon Simulators
+# Pokemon
 
-This repo contains components for a Pokemon Simulator Engine.
+This repo contains core components for a Pokemon Simulator with multiplayer network support.
 
 # Docs
 
