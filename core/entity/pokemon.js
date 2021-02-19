@@ -1,21 +1,21 @@
 function Pokemon() {
-  let id;
-  let name;
-  let type;
-  let level;
-  let stats = {
-    maxHP: 0,
-    currentHP: 0,
-    Attack: 0,
-    Defense: 0,
-    "Sp. Attack": 0,
-    "Sp. Defense": 0,
-    Speed: 0,
-  };
-  let status;
-  let captureRate;
+	let id;
+	let name;
+	let type;
+	let level;
+	let stats = {
+		maxHP: 0,
+		currentHP: 0,
+		Attack: 0,
+		Defense: 0,
+		'Sp. Attack': 0,
+		'Sp. Defense': 0,
+		Speed: 0,
+	};
+	let status;
+	let captureRate;
 
-  /** 
+	/** 
 	@param attackMove the move being used
 	@param target the target pokemon that is being attacked 
 	@param numOfTargets is 0.75 if the move has more than one target, and 1 otherwise.
@@ -28,84 +28,86 @@ function Pokemon() {
 	@param other is 1 in most cases, and a different multiplier when specific interactions of moves, Abilities, or items take effect:
 	@link see https://bulbapedia.bulbagarden.net/wiki/Damage for complete list 
 	*/
-  const getDamage = (
-    attackMove,
-    target,
-    numOfTargets,
-    weather,
-    critical,
-    random,
-    stab,
-    typeEffectiveness,
-    burn,
-    other
-  ) => {
-    const modifier = getModifier(
-      numOfTargets,
-      weather,
-      critical,
-      random,
-      stab,
-      typeEffectiveness,
-      burn,
-      other
-    );
-    const damageAmount =
-      ((((2 * level) / 5 + 2) *
-        attackMove.power *
-        (stats["Attack"] / target.stats["Defense"])) /
-        50 +
-        2) *
-      modifier;
-    return damageAmount;
-  };
+	const getDamage = (
+		attackMove,
+		target,
+		numOfTargets,
+		weather,
+		critical,
+		random,
+		stab,
+		typeEffectiveness,
+		burn,
+		other
+	) => {
+		const modifier = getModifier(
+			numOfTargets,
+			weather,
+			critical,
+			random,
+			stab,
+			typeEffectiveness,
+			burn,
+			other
+		);
+		const damageAmount =
+			((((2 * level) / 5 + 2) *
+				attackMove.power *
+				(stats['Attack'] / target.stats['Defense'])) /
+				50 +
+				2) *
+			modifier;
+		return damageAmount;
+	};
 
-  const setDamage = (
-    attackMove,
-    target,
-    numOfTargets,
-    weather,
-    critical,
-    random,
-    stab,
-    typeEffectiveness,
-    burn,
-    other
-  ) => {
-    const damage = getDamage(
-      attackMove,
-      target,
-      numOfTargets,
-      weather,
-      critical,
-      random,
-      stab,
-      typeEffectiveness,
-      burn,
-      other
-    );
-    target.stats["HP"] -= damage;
-  };
+	const setDamage = (
+		attackMove,
+		target,
+		numOfTargets,
+		weather,
+		critical,
+		random,
+		stab,
+		typeEffectiveness,
+		burn,
+		other
+	) => {
+		const damage = getDamage(
+			attackMove,
+			target,
+			numOfTargets,
+			weather,
+			critical,
+			random,
+			stab,
+			typeEffectiveness,
+			burn,
+			other
+		);
+		target.stats['HP'] -= damage;
+	};
 
-  const getModifier = (
-    numOfTargets,
-    weather,
-    critical,
-    random,
-    stab,
-    typeEffectiveness,
-    burn,
-    other
-  ) => {
-    return (
-      numOfTargets *
-      weather *
-      critical *
-      random *
-      stab *
-      typeEffectiveness *
-      burn *
-      other
-    );
-  };
+	const getModifier = (
+		numOfTargets,
+		weather,
+		critical,
+		random,
+		stab,
+		typeEffectiveness,
+		burn,
+		other
+	) => {
+		return (
+			numOfTargets *
+			weather *
+			critical *
+			random *
+			stab *
+			typeEffectiveness *
+			burn *
+			other
+		);
+	};
 }
+
+module.exports = Pokemon;
